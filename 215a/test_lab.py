@@ -5,10 +5,11 @@ import tempfile
 import argparse
 import logging
 
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
 
 gsi_dir = "/accounts/campus/omer_ronen/Documents/215a/stat-215-a-gsi"
+git_at = open(os.path.join(gsi_dir, "215a", ".git_at")).readlines()[0]
 
 
 def _get_args():
@@ -32,13 +33,13 @@ def _get_test_script(lab_number):
 
 
 def clone_repo(git_user, local_directory):
-    cmd = f"git clone https://github.com/{git_user}/stat-215-a.git {local_directory}"
+    cmd = f"git clone https://OmerRonen:{git_at}@github.com/{git_user}/stat-215-a.git  {local_directory}"
     LOGGER.info(f"Executing command {cmd}")
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
 
-    if err:
-        raise OSError('The process raised an error:', err.decode())
+    # if err:
+    #     raise OSError('The process raised an error:', err.decode())
 
 
 def test_lab(git_user, lab_number):
