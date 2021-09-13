@@ -43,15 +43,15 @@ def clone_repo(git_user, local_directory):
 
 
 def test_lab(git_user, lab_number):
-    with tempfile.TemporaryDirectory() as d:
-        LOGGER.info(f"Testing {git_user}")
-        clone_repo(git_user, d)
-        LOGGER.info(f"files are {os.listdir(d)}")
-        shutil.copyfile(_get_test_script(lab_number), os.path.join(d, "test.sh"))
-        shutil.copytree(_get_data_path(lab_number), os.path.join(d, "data"))
-        subprocess.Popen(f"bash test.sh", cwd=d, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        if os.path.isfile(os.path.join(d, "md_log.txt")):
-            LOGGER.warning(f"{git_user} failed the test!!!")
+    d = os.path.join("/accounts/campus/omer_ronen/Documents/215a", git_user)
+    LOGGER.info(f"Testing {git_user}")
+    clone_repo(git_user, d)
+    LOGGER.info(f"files are {os.listdir(d)}")
+    shutil.copyfile(_get_test_script(lab_number), os.path.join(d, "test.sh"))
+    shutil.copytree(_get_data_path(lab_number), os.path.join(d, "data"))
+    subprocess.Popen(f"bash test.sh", cwd=d, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if os.path.isfile(os.path.join(d, "md_log.txt")):
+        LOGGER.warning(f"{git_user} failed the test!!!")
 
 
 def main():
