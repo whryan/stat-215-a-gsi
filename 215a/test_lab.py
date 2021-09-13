@@ -47,7 +47,7 @@ def test_lab(git_user, lab_number):
         clone_repo(git_user, d)
         shutil.copyfile(_get_test_script(lab_number), os.path.join(d, "test.sh"))
         shutil.copytree(_get_data_path(lab_number), os.path.join(d, "data"))
-        subprocess.Popen(f"bash test.sh", cwd=d)
+        subprocess.Popen(f"bash test.sh", cwd=d,shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if os.path.isfile(os.path.join(d, "md_log.txt")):
             raise Exception(f"{git_user} failed the test!!!")
 
