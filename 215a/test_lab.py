@@ -46,7 +46,7 @@ def test_lab(git_user, lab_number):
     with tempfile.TemporaryDirectory() as d:
         clone_repo(git_user, d)
         shutil.copyfile(_get_test_script(lab_number), os.path.join(d, "test.sh"))
-        shutil.copytree(_get_data_path(lab_number), d)
+        shutil.copytree(_get_data_path(lab_number), os.path.join(d, "data"))
         subprocess.Popen(f"bash {os.path.join(d, 'test.sh')}", cwd=d)
         if os.path.isfile(os.path.join(d, "md_log.txt")):
             raise Exception(f"{git_user} failed the test!!!")
