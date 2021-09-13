@@ -43,10 +43,9 @@ def clone_repo(git_user, local_directory):
 
 
 def test_lab(git_user, lab_number):
-    with tempfile.TemporaryDirectory() as dir:
-        d = os.path.join(dir, git_user)
+    with tempfile.TemporaryDirectory() as d:
         clone_repo(git_user, d)
-        shutil.copyfile(_get_test_script(lab_number), d)
+        shutil.copyfile(_get_test_script(lab_number), os.path.join(d, "test.sh"))
         shutil.copytree(_get_data_path(lab_number), d)
         subprocess.Popen(f"bash {os.path.join(d, 'test.sh')}", cwd=d)
         if os.path.isfile(os.path.join(d, "md_log.txt")):
