@@ -32,7 +32,7 @@ def _get_test_script(lab_number):
 
 
 def clone_repo(git_user, local_directory):
-    cmd = f"git clone git@github.com:{git_user}/stat-215-a.git {local_directory}"
+    cmd = f"git clone https://github.com/{git_user}/stat-215-a.git {local_directory}"
     LOGGER.info(f"Executing command {cmd}")
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
