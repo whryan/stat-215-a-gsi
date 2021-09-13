@@ -52,3 +52,7 @@ def main():
     repos = _get_repos()
     for student in repos:
         test_lab(student, lab_number)
+
+
+if __name__ == '__main__':
+    main()
