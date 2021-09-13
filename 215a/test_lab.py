@@ -37,7 +37,7 @@ def clone_repo(git_user, local_directory):
 
 
 def test_lab(git_user, lab_number):
-    with tempfile.TemporaryDirectory as d:
+    with tempfile.TemporaryDirectory() as d:
         clone_repo(git_user, d.name)
         shutil.copyfile(_get_test_script(lab_number), os.path.join(d.name, "test.sh"))
         shutil.copytree(_get_data_path(lab_number), d.name)
