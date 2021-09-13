@@ -5,6 +5,7 @@ import tempfile
 import argparse
 import logging
 
+logging.basicConfig(level = logging.INFO)
 LOGGER = logging.getLogger(__name__)
 
 gsi_dir = "/accounts/campus/omer_ronen/Documents/215a/stat-215-a-gsi"
